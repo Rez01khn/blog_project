@@ -27,7 +27,6 @@ class AuthController extends Controller
         ];
         return view('back.pages.auth.forgot', $data);
     }
-
     public function loginHandler(Request $request)
     {
         $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -50,12 +49,10 @@ class AuthController extends Controller
                 'login_id.exists' => 'No account found for this username'
             ]);
         }
-
         $creds = [
             $fieldType => $request->login_id,
             'password' => $request->password,
         ];
-
         if (Auth::attempt($creds)) {
 
             // inactive account
@@ -67,7 +64,6 @@ class AuthController extends Controller
                 return redirect()->route('admin.login')
                     ->with('fail', 'Your account is inactive. Please contact support (suport@larablog.com).');
             }
-
             // pending account
             if (auth()->user()->status == UserStatus::Pending) {
                 Auth::logout();
@@ -76,11 +72,9 @@ class AuthController extends Controller
                 return redirect()->route('admin.login')
                     ->with('fail', 'Your account is pending approval.');
             }
-
             // success login
             return redirect()->route('admin.dashboard');
         }
-
         return redirect()->route('admin.login')
             ->withInput()
             ->with('fail', 'Incorrect login credentials.Please contact support (suport@larablog.com).');
