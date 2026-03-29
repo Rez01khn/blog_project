@@ -161,6 +161,12 @@ class AuthController extends Controller
         if (!$isTokenExists) {
             return redirect()->route('admin.forgot')->with('fail', 'Invalid token,Request another reset password link.');
         } else {
+            $diffmins = Carbon::createFromFormat('Y-m-d H:i:s', $isTokenExists->created_at)
+                ->diffInMinutes(Carbon::now());
+            if($diffmins >15){
+                return redirect()->route('admin.forgot')->with('fail','The password rest link you clicked has exprired. Please request a new link');
+            }
+
             $data = [
                 'pageTitle' => 'Reset Password',
                 'token' => $token
@@ -212,7 +218,5 @@ class AuthController extends Controller
         } else {
             return redirect()->route('admin.reset_password_form', ['token' => $dbToken->token])->with('fail', 'Something went wrong. Try Again later');
         }
-
     }
-
 }

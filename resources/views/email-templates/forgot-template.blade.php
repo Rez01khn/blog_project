@@ -84,7 +84,8 @@
             <p style="text-align:center;">
                 <a href="{{ $actionlink }}" target="_blank"  class="button">Reset Password</a>
             </p>
-            <p>If you didn’t request this, you can safely ignore this email. Your password will not change.</p>
+            <p> This link is valid for 15 minutes.</p>
+            <p>If you did not request this, you can safely ignore this email. Your password will not change.</p>
             <p>Thank you,<br>The {{ config('app.name') }} Team</p>
         </div>
 

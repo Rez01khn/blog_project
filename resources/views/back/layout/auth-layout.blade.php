@@ -23,7 +23,6 @@
 	<link rel="stylesheet" type="text/css" href="/back/vendors/styles/style.css" />
 	@stack('stylesheets')
 </head>
-
 <body class="login-page">
 	<div class="login-header box-shadow">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
@@ -55,5 +54,4 @@
 	<script src="/back/vendors/scripts/layout-settings.js"></script>
 	@stack('scripts')
 </body>
-
 </html>
